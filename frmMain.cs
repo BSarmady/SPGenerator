@@ -92,11 +92,15 @@ namespace SPGenerator {
                 cbServers.Items.Add(settings.Server);
             if (cbServers.Items.Count > 0)
                 cbServers.SelectedIndex = 0;
+
+            Reg.LoadWindowPos(AppRegistryKey,this);
         }
         #endregion
 
         #region private void frmMain_FormClosed(...)
         private void frmMain_FormClosed(object sender, FormClosedEventArgs e) {
+            Reg.SaveWindowPos(AppRegistryKey,this);
+
             Reg.Write(AppRegistryKey, "Author", edtAuthor.Text);
             Reg.Write(AppRegistryKey, "SaveFolder", edtSaveFolder.Text);
             Reg.Write(AppRegistryKey, "AddCommentHeader", cbAddCommentHeader.Checked ? 1 : 0);
